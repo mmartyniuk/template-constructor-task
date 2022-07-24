@@ -3,25 +3,89 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/react": "^13.3.0",
-    "@testing-library/user-event": "^13.5.0",
+    "eslint-config-airbnb": "^19.0.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-redux": "^8.0.2",
     "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
+    "redux": "^4.2.0",
+    "uuid": "^8.3.2"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint 'src/**/*.{js,jsx}' --fix"
   },
   "eslintConfig": {
+    "parserOptions": {
+      "ecmaVersion": 2020,
+      "ecmaFeatures": {
+        "jsx": true
+      }
+    },
+    "env": {
+      "browser": true
+    },
     "extends": [
       "react-app",
-      "react-app/jest"
-    ]
+      "airbnb",
+      "plugin:react/jsx-runtime"
+    ],
+    "rules": {
+      "react/react-in-jsx-scope": 0,
+      "react/jsx-uses-react": 0,
+      "import/prefer-default-export": "off",
+      "linebreak-style": "off",
+      "import/no-named-as-default": 0,
+      "indent": [
+        "error",
+        2
+      ],
+      "max-len": "off",
+      "arrow-body-style": "off",
+      "keyword-spacing": "off",
+      "no-nested-ternary": "off",
+      "default-case": "off",
+      "react/jsx-no-bind": "off",
+      "react/destructuring-assignment": "off",
+      "react/jsx-filename-extension": [
+        1,
+        {
+          "extensions": [
+            ".js",
+            ".jsx"
+          ]
+        }
+      ],
+      "react/button-has-type": "off",
+      "default-param-last": "off",
+      "react/prop-types": "off",
+      "camelcase": "off",
+      "import/no-unresolved": "off",
+      "jsx-a11y/anchor-is-valid": "off",
+      "prefer-promise-reject-errors": "off",
+      "jsx-a11y/label-has-for": "off",
+      "jsx-a11y/click-events-have-key-events": "off",
+      "jsx-a11y/no-noninteractive-element-interactions": "off",
+      "jsx-a11y/no-static-element-interactions": "off",
+      "import/no-useless-path-segments": "off",
+      "react/jsx-props-no-spreading": [
+        2,
+        {
+          "custom": "ignore"
+        }
+      ],
+      "import/extensions": [
+        "error",
+        "ignorePackages",
+        {
+          "js": "never",
+          "jsx": "never"
+        }
+      ]
+    }
   },
   "browserslist": {
     "production": [

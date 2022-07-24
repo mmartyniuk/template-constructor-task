@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "baseUrl": "src",
+    "paths": {
+      "constants/*": ["./src/assets/*"],
+      "store/*": ["./src/store/*"]
+    }
+  },
+  "include": ["src"]
+}
