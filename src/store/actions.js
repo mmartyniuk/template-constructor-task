@@ -38,3 +38,7 @@ export const selectBlock = (payload) => ({
 export const deselectBlock = () => ({
   type: constants.DESELECT_BLOCK,
 });
+
+export const reset = () => ({
+  type: constants.RESET,
+});

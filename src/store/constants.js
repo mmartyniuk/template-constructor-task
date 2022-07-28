@@ -6,3 +6,4 @@ export const MOVE_DOWN_BLOCK = 'MOVE_DOWN_BLOCK';
 export const COPY_BLOCK = 'COPY_BLOCK';
 export const SELECT_BLOCK = 'SELECT_BLOCK';
 export const DESELECT_BLOCK = 'DESELECT_BLOCK';
+export const RESET = 'RESET';

@@ -78,3 +78,7 @@
     margin: 5px 10px;
     width: auto;
 }
+
+.viewer > div img {
+    filter: drop-shadow(3px 3px 3px #222);
+}

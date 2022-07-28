@@ -1,8 +1,8 @@
 import { memo } from 'react';
 import { TYPE_DEFAULT_VALUES, TYPES } from 'constants/types';
-import { addBlock } from 'store/actions';
+import { addBlock, reset } from 'store/actions';
 import { useDispatch, useSelector } from 'react-redux';
-import { getSelectedId } from 'store/selectors';
+import { getSelectedId, getBlockIds } from 'store/selectors';
 import { BLOCK_TYPE_KEY } from 'constants/config';
 import Tool from './tool';
 
@@ -16,7 +16,12 @@ const onDragStart = (event) => {
 
 const Toolbar = () => {
   const selectedId = useSelector(getSelectedId);
+  const blockIds = useSelector(getBlockIds);
   const dispatch = useDispatch();
+
+  const onReset = () => {
+    dispatch(reset());
+  };
 
   const onAddBlock = (type) => {
     dispatch(addBlock({ type, content: TYPE_DEFAULT_VALUES[type] }));
@@ -26,8 +31,8 @@ const Toolbar = () => {
     <div
       className="toolbar"
       style={{
-        ...(selectedId ? DISABLED_ELEMENT_STYLES : {}),
         ...ELEMENT_STYLES,
+        ...(selectedId ? DISABLED_ELEMENT_STYLES : {}),
       }}
     >
       {TYPES_LIST.map((type) => (
@@ -35,9 +40,14 @@ const Toolbar = () => {
           key={type}
           type={type}
           onStart={!selectedId ? onDragStart : undefined}
-          onAddBlock={!selectedId ? onAddBlock : undefined}
+          onAdd={!selectedId ? onAddBlock : undefined}
         />
       ))}
+      {
+        blockIds.length ? (
+          <button type="button" onClick={onReset} disabled={selectedId}>Clear</button>
+        ) : null
+      }
     </div>
   );
 };

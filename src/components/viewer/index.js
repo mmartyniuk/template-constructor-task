@@ -1,8 +1,8 @@
 import { useCallback, memo } from 'react';
 import { useSelector } from 'react-redux';
+import { TYPE_COLORS } from 'constants/types';
+import { getBlockData, getBlockIds, getSelectedId } from 'store/selectors';
 import { COMPONENT_TYPES_MAP } from './constants';
-import { getBlockData, getBlockIds, getSelectedId } from '../../store/selectors';
-import { TYPE_COLORS } from '../../constants/types';
 
 const Viewer = () => {
   const blockIds = useSelector(getBlockIds);

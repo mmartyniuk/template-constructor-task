@@ -1,4 +1,4 @@
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as getUniqueId } from 'uuid';
 import * as constants from 'store/constants';
 import { STORAGE_KEY } from 'constants/config';
 
@@ -15,7 +15,7 @@ const initialState = {
 export const appReducer = (state = initialState, action) => {
   switch (action.type) {
   case constants.COPY_BLOCK: {
-    const id = uuidv4();
+    const id = getUniqueId();
 
     const newState = {
       ...state,
@@ -28,12 +28,16 @@ export const appReducer = (state = initialState, action) => {
       },
     };
 
-    rewriteLocalState(newState);
+    const { selectedId, ...restStateValues } = newState;
+
+    rewriteLocalState(restStateValues);
 
     return newState;
   }
+
   case constants.ADD_BLOCK: {
-    const id = uuidv4();
+    const id = getUniqueId();
+
     const newState = {
       ...state,
       ids: [...state.ids, id],
@@ -45,10 +49,13 @@ export const appReducer = (state = initialState, action) => {
       },
     };
 
-    rewriteLocalState(newState);
+    const { selectedId, ...restStateValues } = newState;
+
+    rewriteLocalState(restStateValues);
 
     return newState;
   }
+
   case constants.EDIT_BLOCK: {
     const newState = {
       ...state,
@@ -61,10 +68,13 @@ export const appReducer = (state = initialState, action) => {
       },
     };
 
-    rewriteLocalState(newState);
+    const { selectedId, ...restStateValues } = newState;
+
+    rewriteLocalState(restStateValues);
 
     return newState;
   }
+
   case constants.REMOVE_BLOCK: {
     const updatedData = { ...state.data };
 
@@ -76,7 +86,9 @@ export const appReducer = (state = initialState, action) => {
       data: updatedData,
     };
 
-    rewriteLocalState(newState);
+    const { selectedId, ...restStateValues } = newState;
+
+    rewriteLocalState(restStateValues);
 
     return newState;
   }
@@ -89,7 +101,9 @@ export const appReducer = (state = initialState, action) => {
 
     const newState = { ...state, ids: newIds };
 
-    rewriteLocalState(newState);
+    const { selectedId, ...restStateValues } = newState;
+
+    rewriteLocalState(restStateValues);
 
     return newState;
   }
@@ -102,20 +116,37 @@ export const appReducer = (state = initialState, action) => {
 
     const newState = { ...state, ids: newIds };
 
-    rewriteLocalState(newState);
+    const { selectedId, ...restStateValues } = newState;
+
+    rewriteLocalState(restStateValues);
 
     return newState;
   }
+
   case constants.SELECT_BLOCK: {
-    const newState = { ...state, selectedId: action.payload.id };
-
-    return newState;
+    return {
+      ...state,
+      selectedId: action.payload.id,
+    };
   }
+
   case constants.DESELECT_BLOCK: {
-    const newState = { ...state, selectedId: null };
+    return {
+      ...state,
+      selectedId: null,
+    };
+  }
+
+  case constants.RESET: {
+    const newState = { ...initialState };
+
+    const { selectedId, ...restStateValues } = newState;
+
+    rewriteLocalState(restStateValues);
 
     return newState;
   }
+
   default:
     return state;
   }

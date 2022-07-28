@@ -3,13 +3,13 @@ import { getBlockCountByType } from 'store/selectors';
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
-const Tool = ({ type, onStart, onAddBlock }) => {
+const Tool = ({ type, onStart, onAdd }) => {
   const count = useSelector(getBlockCountByType(type));
 
   const handleClick = (event) => {
     event.preventDefault();
 
-    onAddBlock(type);
+    onAdd(type);
   };
 
   const containerStyles = useMemo(() => ({

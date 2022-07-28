@@ -1,7 +1,10 @@
 import { useState, useCallback } from 'react';
 
 const ACTION_CONTAINER_STYLES = {
-  position: 'absolute', top: '-10px', right: '0', zIndex: 3,
+  position: 'absolute',
+  top: '-10px',
+  right: 0,
+  zIndex: 3,
 };
 
 const INPUT_CONTAINER_STYLES = {
@@ -80,11 +83,18 @@ const ActionPanel = ({
         <button onClick={toggleEditable}>
           {isEditable ? 'Save' : 'Edit'}
         </button>
-        <button onClick={onRemove} disabled={isEditable}>Remove</button>
-        <button onClick={onMoveUp} disabled={isEditable || isFirst}>Move up</button>
-        <button onClick={onMoveDown} disabled={isEditable || isLast}>Move down</button>
-        <button onClick={onCopy} disabled={isEditable}>Clone</button>
-        <button onClick={handleExit} disabled={!isEditable}>Exit</button>
+        {
+          !isEditable ? (
+            <>
+              <button onClick={onRemove} disabled={isEditable}>Remove</button>
+              <button onClick={onMoveUp} disabled={isEditable || isFirst}>Move up</button>
+              <button onClick={onMoveDown} disabled={isEditable || isLast}>Move down</button>
+              <button onClick={onCopy} disabled={isEditable}>Clone</button>
+            </>
+          ) : (
+            <button onClick={handleExit}>Exit</button>
+          )
+        }
       </div>
     );
   };
