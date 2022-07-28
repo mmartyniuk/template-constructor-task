@@ -1,10 +1,10 @@
-import { useCallback } from 'react';
+import { useCallback, memo } from 'react';
 import { useSelector } from 'react-redux';
 import { COMPONENT_TYPES_MAP } from './constants';
 import { getBlockData, getBlockIds, getSelectedId } from '../../store/selectors';
 import { TYPE_COLORS } from '../../constants/types';
 
-function Viewer() {
+const Viewer = () => {
   const blockIds = useSelector(getBlockIds);
   const data = useSelector(getBlockData);
   const activeBlockId = useSelector(getSelectedId);
@@ -34,6 +34,6 @@ function Viewer() {
       }
     </div>
   );
-}
+};
 
-export default Viewer;
+export default memo(Viewer);

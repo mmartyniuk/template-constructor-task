@@ -1,11 +1,12 @@
 import { createStore } from 'redux';
+import { STORAGE_KEY } from 'constants/config';
 import { appReducer } from './reducer';
 
 const createApplicationStore = () => {
   let preloadedState;
 
   try {
-    const storedData = localStorage.getItem('blocks-test-task');
+    const storedData = localStorage.getItem(STORAGE_KEY);
 
     if(storedData) {
       preloadedState = JSON.parse(storedData);

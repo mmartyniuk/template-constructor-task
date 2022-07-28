@@ -1,15 +1,14 @@
+import { memo } from 'react';
 import Toolbar from './toolbar';
 import Editor from './editor';
 import Viewer from './viewer';
 
-function App() {
-  return (
-    <div className="app">
-      <Toolbar />
-      <Editor />
-      <Viewer />
-    </div>
-  );
-}
+const App = () => (
+  <div className="app">
+    <Toolbar />
+    <Editor />
+    <Viewer />
+  </div>
+);
 
-export default App;
+export default memo(App);

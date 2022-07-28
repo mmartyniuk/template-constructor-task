@@ -1,5 +1,10 @@
 import { v4 as uuidv4 } from 'uuid';
 import * as constants from 'store/constants';
+import { STORAGE_KEY } from 'constants/config';
+
+const rewriteLocalState = (state) => {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+};
 
 const initialState = {
   data: {},
@@ -23,7 +28,7 @@ export const appReducer = (state = initialState, action) => {
       },
     };
 
-    localStorage.setItem('blocks-test-task', JSON.stringify(newState));
+    rewriteLocalState(newState);
 
     return newState;
   }
@@ -40,7 +45,7 @@ export const appReducer = (state = initialState, action) => {
       },
     };
 
-    localStorage.setItem('blocks-test-task', JSON.stringify(newState));
+    rewriteLocalState(newState);
 
     return newState;
   }
@@ -56,7 +61,7 @@ export const appReducer = (state = initialState, action) => {
       },
     };
 
-    localStorage.setItem('blocks-test-task', JSON.stringify(newState));
+    rewriteLocalState(newState);
 
     return newState;
   }
@@ -71,7 +76,7 @@ export const appReducer = (state = initialState, action) => {
       data: updatedData,
     };
 
-    localStorage.setItem('blocks-test-task', JSON.stringify(newState));
+    rewriteLocalState(newState);
 
     return newState;
   }
@@ -84,7 +89,7 @@ export const appReducer = (state = initialState, action) => {
 
     const newState = { ...state, ids: newIds };
 
-    localStorage.setItem('blocks-test-task', JSON.stringify(newState));
+    rewriteLocalState(newState);
 
     return newState;
   }
@@ -97,21 +102,21 @@ export const appReducer = (state = initialState, action) => {
 
     const newState = { ...state, ids: newIds };
 
-    localStorage.setItem('blocks-test-task', JSON.stringify(newState));
+    rewriteLocalState(newState);
 
     return newState;
   }
   case constants.SELECT_BLOCK: {
     const newState = { ...state, selectedId: action.payload.id };
 
-    localStorage.setItem('blocks-test-task', JSON.stringify(newState));
+    rewriteLocalState(newState);
 
     return newState;
   }
   case constants.DESELECT_BLOCK: {
     const newState = { ...state, selectedId: null };
 
-    localStorage.setItem('blocks-test-task', JSON.stringify(newState));
+    rewriteLocalState(newState);
 
     return newState;
   }

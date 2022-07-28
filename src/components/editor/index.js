@@ -1,20 +1,21 @@
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   addBlock, moveDownBlock, removeBlock, moveUpBlock, copyBlock, editBlock, deselectBlock, selectBlock,
 } from 'store/actions';
 import { getBlockIds, getBlockData, getSelectedId } from 'store/selectors';
 import { LABELS, TYPE_COLORS, TYPE_DEFAULT_VALUES } from 'constants/types';
+import { BLOCK_TYPE_KEY } from 'constants/config';
 import ActionPanel from './action-panel';
 
-function Editor() {
+const Editor = () => {
   const dispatch = useDispatch();
   const blockIds = useSelector(getBlockIds);
   const data = useSelector(getBlockData);
   const [isDropReady, setDropReady] = useState(false);
   const selectedId = useSelector(getSelectedId);
 
-  const onDeselectBlock = () => {
+  const onDeselect = () => {
     dispatch(deselectBlock());
   };
 
@@ -35,7 +36,7 @@ function Editor() {
   };
 
   const onDrop = (event) => {
-    const type = event.dataTransfer.getData('blockType');
+    const type = event.dataTransfer.getData(BLOCK_TYPE_KEY);
 
     if (isDropReady) {
       event.preventDefault();
@@ -57,8 +58,16 @@ function Editor() {
       {
         blockIds.map((id, index) => {
           const { content, type } = data[id];
+          const isCurrentBlockSelected = selectedId && selectedId === id;
+          const isOtherBlockSelected = selectedId && selectedId !== id;
 
-          const onSelectBlock = () => {
+          const containerStyles = {
+            ...(isCurrentBlockSelected ? { filter: 'blur(0)' } : {}),
+            ...(isOtherBlockSelected ? { filter: 'blur(1rem)' } : {}),
+            backgroundColor: TYPE_COLORS[type],
+          };
+
+          const onSelect = () => {
             dispatch(selectBlock({ id }));
           };
 
@@ -88,11 +97,7 @@ function Editor() {
           return (
             <div
               key={id}
-              style={{
-                ...(selectedId && selectedId === id ? { filter: 'blur(0)' } : {}),
-                ...(selectedId && selectedId !== id ? { filter: 'blur(1rem)' } : {}),
-                backgroundColor: TYPE_COLORS[type],
-              }}
+              style={containerStyles}
             >
               <sup>{LABELS[type]}</sup>
               <ActionPanel
@@ -100,8 +105,8 @@ function Editor() {
                 isLast={index === blockIds.length - 1}
                 isActive={id === selectedId}
                 defaultValue={content}
-                onSelectBlock={onSelectBlock}
-                onDeselectBlock={onDeselectBlock}
+                onSelect={onSelect}
+                onDeselect={onDeselect}
                 onRemove={onRemove}
                 onMoveUp={onMoveUp}
                 onMoveDown={onMoveDown}
@@ -114,6 +119,6 @@ function Editor() {
       }
     </div>
   );
-}
+};
 
-export default Editor;
+export default memo(Editor);

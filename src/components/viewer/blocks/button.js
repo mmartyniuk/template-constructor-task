@@ -1,5 +1,5 @@
 function Button({ content: label }) {
-  return <button>{label}</button>;
+  return <button type="button">{label}</button>;
 }
 
 export default Button;

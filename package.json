@@ -37,6 +37,7 @@
     "rules": {
       "react/react-in-jsx-scope": 0,
       "react/jsx-uses-react": 0,
+      "react/function-component-definition": 0,
       "import/prefer-default-export": "off",
       "linebreak-style": "off",
       "import/no-named-as-default": 0,

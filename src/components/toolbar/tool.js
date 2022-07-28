@@ -1,8 +1,9 @@
 import { LABELS, TYPE_COLORS } from 'constants/types';
 import { getBlockCountByType } from 'store/selectors';
+import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
-function Tool({ type, onStart, onAddBlock }) {
+const Tool = ({ type, onStart, onAddBlock }) => {
   const count = useSelector(getBlockCountByType(type));
 
   const handleClick = (event) => {
@@ -11,15 +12,17 @@ function Tool({ type, onStart, onAddBlock }) {
     onAddBlock(type);
   };
 
+  const containerStyles = useMemo(() => ({
+    backgroundColor: TYPE_COLORS[type],
+  }), [type]);
+
   return (
     <div
       draggable="true"
       id={type}
       onDragStart={onStart}
       onClick={handleClick}
-      style={{
-        backgroundColor: TYPE_COLORS[type],
-      }}
+      style={containerStyles}
     >
       <pre>
         Add
@@ -34,6 +37,6 @@ function Tool({ type, onStart, onAddBlock }) {
       </sup>
     </div>
   );
-}
+};
 
 export default Tool;
