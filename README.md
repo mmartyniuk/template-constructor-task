@@ -1,6 +1,6 @@
 # Test task solution
 
-### Requirements:
+### Task requirements:
 Create an application which allows user to generate simple content blocks, 
 edit them and view the result.
 
@@ -16,8 +16,11 @@ During edit, user can change block content, clone, move up or down and delete.
 
 View section render blocks depending on type and content.
 
-### Installation:
+### App installation:
 #### `yarn install`
 
-### Startup:
+### App startup:
 #### `yarn start`
+
+### Demo:
+![](https://raw.githubusercontent.com/mmartyniuk/template-constructor-task/main/public/demo.gif)
