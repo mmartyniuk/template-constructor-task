@@ -1,5 +1,5 @@
 const Image = ({ content: src }) => (
-  <img src={src} width={250} alt={src} />
+  <img src={src} alt={src} />
 );
 
 export default Image;

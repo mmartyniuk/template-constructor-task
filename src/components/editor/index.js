@@ -92,12 +92,10 @@ const Editor = () => {
       {
         blockIds.map((id, index) => {
           const { content, type } = data[id];
-          const isCurrentBlockSelected = selectedId && selectedId === id;
           const isOtherBlockSelected = selectedId && selectedId !== id;
           const Icon = TYPE_ICONS[type]();
 
           const containerStyles = {
-            ...(isCurrentBlockSelected ? { filter: 'blur(0)' } : {}),
             ...(isOtherBlockSelected ? { filter: 'blur(1rem)', pointerEvents: 'none' } : {}),
             backgroundColor: TYPE_COLORS[type],
           };

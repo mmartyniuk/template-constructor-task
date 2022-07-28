@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 
 const ACTION_CONTAINER_STYLES = {
   position: 'absolute',
-  top: '-20px',
+  top: '-40px',
   right: 0,
   zIndex: 3,
 };
