@@ -109,14 +109,10 @@ export const appReducer = (state = initialState, action) => {
   case constants.SELECT_BLOCK: {
     const newState = { ...state, selectedId: action.payload.id };
 
-    rewriteLocalState(newState);
-
     return newState;
   }
   case constants.DESELECT_BLOCK: {
     const newState = { ...state, selectedId: null };
-
-    rewriteLocalState(newState);
 
     return newState;
   }
