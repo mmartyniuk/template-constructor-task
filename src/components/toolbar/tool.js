@@ -1,10 +1,11 @@
-import { LABELS, TYPE_COLORS } from 'constants/types';
+import { TYPE_COLORS, TYPE_ICONS } from 'constants/types';
 import { getBlockCountByType } from 'store/selectors';
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
 const Tool = ({ type, onStart, onAdd }) => {
   const count = useSelector(getBlockCountByType(type));
+  const Icon = TYPE_ICONS[type]();
 
   const handleClick = (event) => {
     event.preventDefault();
@@ -22,14 +23,8 @@ const Tool = ({ type, onStart, onAdd }) => {
       id={type}
       onDragStart={onStart}
       onClick={handleClick}
-      style={containerStyles}
     >
-      <pre>
-        Add
-        {' '}
-        {LABELS[type]}
-      </pre>
-      <br />
+      <div className="icon-container" style={containerStyles}>{Icon}</div>
       <sup>
         Count:
         {' '}

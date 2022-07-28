@@ -11,7 +11,11 @@ import {
   selectBlock,
 } from 'store/actions';
 import { getBlockIds, getBlockData, getSelectedId } from 'store/selectors';
-import { LABELS, TYPE_COLORS, TYPE_DEFAULT_VALUES } from 'constants/types';
+import {
+  TYPE_COLORS,
+  TYPE_DEFAULT_VALUES,
+  TYPE_ICONS,
+} from 'constants/types';
 import { BLOCK_TYPE_KEY } from 'constants/config';
 import ActionPanel from './action-panel';
 
@@ -90,6 +94,7 @@ const Editor = () => {
           const { content, type } = data[id];
           const isCurrentBlockSelected = selectedId && selectedId === id;
           const isOtherBlockSelected = selectedId && selectedId !== id;
+          const Icon = TYPE_ICONS[type]();
 
           const containerStyles = {
             ...(isCurrentBlockSelected ? { filter: 'blur(0)' } : {}),
@@ -106,7 +111,9 @@ const Editor = () => {
               key={id}
               style={containerStyles}
             >
-              <sup>{LABELS[type]}</sup>
+              <div className="icon-container">
+                {Icon}
+              </div>
               <ActionPanel
                 isFirst={index === 0}
                 isLast={index === blockIds.length - 1}

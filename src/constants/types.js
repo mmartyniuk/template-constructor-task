@@ -1,3 +1,8 @@
+import Button from 'library/icons/button';
+import Title from 'library/icons/title';
+import Paragraph from 'library/icons/paragraph';
+import Image from 'library/icons/image';
+
 export const TYPES = {
   IMAGE: 'image',
   TITLE: 'title',
@@ -24,4 +29,11 @@ export const TYPE_COLORS = {
   [TYPES.PARAGRAPH]: 'sandybrown',
   [TYPES.IMAGE]: 'cornsilk',
   [TYPES.BUTTON]: 'darkseagreen',
+};
+
+export const TYPE_ICONS = {
+  [TYPES.TITLE]: Title,
+  [TYPES.PARAGRAPH]: Paragraph,
+  [TYPES.IMAGE]: Image,
+  [TYPES.BUTTON]: Button,
 };

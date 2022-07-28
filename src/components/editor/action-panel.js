@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 
 const ACTION_CONTAINER_STYLES = {
   position: 'absolute',
-  top: '-10px',
+  top: '-20px',
   right: 0,
   zIndex: 3,
 };
@@ -49,13 +49,16 @@ const ActionPanel = ({
     }
   }, [isEditable]);
 
+  // toggle edit state on block click (due to requirements)
   const handleSelect = (event) => {
     event.stopPropagation();
 
-    if(!isActive && !isEditable) {
-      onSelect();
-    } else if(isActive && !isEditable) {
-      onDeselect();
+    if(!isEditable) {
+      if(!isActive) {
+        onSelect();
+      } else {
+        onDeselect();
+      }
     }
   };
 
@@ -79,9 +82,9 @@ const ActionPanel = ({
     }
 
     return (
-      <div style={ACTION_CONTAINER_STYLES}>
+      <div style={ACTION_CONTAINER_STYLES} title="">
         <button onClick={toggleEditable}>
-          {isEditable ? 'Save' : 'Edit'}
+          {isEditable ? 'Save' : 'Edit content'}
         </button>
         {
           !isEditable ? (
@@ -99,16 +102,26 @@ const ActionPanel = ({
     );
   };
 
+  const getTitle = () => {
+    if(isEditable) {
+      return '';
+    }
+
+    return (isActive) ? 'Click to deselect' : 'Click to select';
+  };
+
   return (
     <div
       style={CONTAINER_STYLES}
       onClick={handleSelect}
+      title={getTitle()}
     >
       {getActionButtons(isEditable)}
       <div style={INPUT_CONTAINER_STYLES}>
         <textarea
           rows={3}
           value={value}
+          title=""
           onChange={handleInputChange}
           onClick={handleInputClick}
           readOnly={!isEditable}

@@ -2,6 +2,7 @@
   "compilerOptions": {
     "baseUrl": "src",
     "paths": {
+      "library/*": ["./src/library/*"],
       "constants/*": ["./src/constants/*"],
       "store/*": ["./src/store/*"]
     }
