@@ -7,7 +7,7 @@ import { BLOCK_TYPE_KEY } from 'constants/config';
 import Tool from './tool';
 
 const TYPES_LIST = Object.values(TYPES);
-const DISABLED_ELEMENT_STYLES = { filter: 'grayscale(1)', cursor: 'not-allowed', opacity: 0.3 };
+const DISABLED_ELEMENT_STYLES = { filter: 'grayscale(1)', opacity: 0.3, pointerEvents: 'none' };
 const ELEMENT_STYLES = { cursor: 'pointer' };
 
 const onDragStart = (event) => {

@@ -1,7 +1,14 @@
 import { useState, memo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  addBlock, moveDownBlock, removeBlock, moveUpBlock, copyBlock, editBlock, deselectBlock, selectBlock,
+  addBlock,
+  moveDownBlock,
+  removeBlock,
+  moveUpBlock,
+  copyBlock,
+  editBlock,
+  deselectBlock,
+  selectBlock,
 } from 'store/actions';
 import { getBlockIds, getBlockData, getSelectedId } from 'store/selectors';
 import { LABELS, TYPE_COLORS, TYPE_DEFAULT_VALUES } from 'constants/types';
@@ -47,6 +54,29 @@ const Editor = () => {
     }
   };
 
+  const onRemove = () => {
+    dispatch(removeBlock({ id: selectedId }));
+  };
+
+  const onMoveDown = () => {
+    dispatch(moveDownBlock({ id: selectedId }));
+  };
+
+  const onMoveUp = () => {
+    dispatch(moveUpBlock({ id: selectedId }));
+  };
+
+  const onEdit = (updatedData) => {
+    dispatch(editBlock({
+      ...updatedData,
+      id: selectedId,
+    }));
+  };
+
+  const onCopy = () => {
+    dispatch(copyBlock({ id: selectedId }));
+  };
+
   return (
     <div
       className="editor"
@@ -63,35 +93,12 @@ const Editor = () => {
 
           const containerStyles = {
             ...(isCurrentBlockSelected ? { filter: 'blur(0)' } : {}),
-            ...(isOtherBlockSelected ? { filter: 'blur(1rem)' } : {}),
+            ...(isOtherBlockSelected ? { filter: 'blur(1rem)', pointerEvents: 'none' } : {}),
             backgroundColor: TYPE_COLORS[type],
           };
 
           const onSelect = () => {
             dispatch(selectBlock({ id }));
-          };
-
-          const onRemove = () => {
-            dispatch(removeBlock({ id }));
-          };
-
-          const onMoveDown = () => {
-            dispatch(moveDownBlock({ id }));
-          };
-
-          const onMoveUp = () => {
-            dispatch(moveUpBlock({ id }));
-          };
-
-          const onEdit = (updatedData) => {
-            dispatch(editBlock({
-              ...updatedData,
-              id,
-            }));
-          };
-
-          const onCopy = () => {
-            dispatch(copyBlock({ id }));
           };
 
           return (
